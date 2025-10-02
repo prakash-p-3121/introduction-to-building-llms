@@ -34,6 +34,6 @@ This is the state-of-the-art and most widely used method. It's an adaptive versi
 * **How it works:** Instead of picking a fixed number `k` of words, you pick the smallest set of words whose cumulative probability is greater than a certain threshold `p` (e.g., `p=0.95`). Then you sample from this set.
 * **Example:** If `p=0.9`, you'd sort the words by probability and add them to your set one by one until their total probability exceeds 90%.
 * **Why it's the best:** It's adaptive.
-    * If the model is very confident about the next word (e.g., "now" has 92% probability), the nucleus will be very small, maybe just one word. The model acts like greedy search.
+    * If the model is very confident about the next word (e.g., "artificial" has 92% probability), the nucleus will be very small, maybe just one word. The model acts like greedy search.
     * If the model is uncertain (many words have similar, low probabilities), the nucleus will be larger, allowing for more creative choices.
 * This method is used in most modern chatbots, including those powered by GPT, as it provides the best balance of coherence and creativity.

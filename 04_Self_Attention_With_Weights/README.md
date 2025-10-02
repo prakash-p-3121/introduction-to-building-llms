@@ -28,49 +28,18 @@ We perform a matrix multiplication of our input $X$ with each of the new weight 
 
 Let's assume we have our input matrix $X$ (first 3 words) and our randomly initialized weight matrices $W_q, W_k, W_v$. Our embeddings and weight matrices have a dimension of 3.
 
-$$
-X = \begin{bmatrix}
-1.8 & 0.1 & 0.5 \\
-0.3 & 1.2 & 0.8 \\
-1.8 & -0.3 & 0.8
-\end{bmatrix}
-$$
+![Initial X Matrix](https://latex.codecogs.com/svg.latex?%5Cbg_white%20X%20%3D%20%5Cbegin%7Bbmatrix%7D%201.8%20%26%200.1%20%26%200.5%20%5C%5C%200.3%20%26%201.2%20%26%200.8%20%5C%5C%201.8%20%26%20-0.3%20%26%200.8%20%5Cend%7Bbmatrix%7D)
 
-$$
-W_q = \begin{bmatrix} 0.1 & 0.2 & 0.3 \\ 0.4 & 0.5 & 0.6 \\ 0.7 & 0.8 & 0.9 \end{bmatrix},
-\ W_k = \begin{bmatrix} 0.2 & 0.3 & 0.4 \\ 0.5 & 0.6 & 0.7 \\ 0.8 & 0.9 & 0.1 \end{bmatrix},
-\ W_v = \begin{bmatrix} 0.3 & 0.4 & 0.5 \\ 0.6 & 0.7 & 0.8 \\ 0.9 & 0.1 & 0.2 \end{bmatrix}
-$$
+![Weight Matrices Wq, Wk, Wv](https://latex.codecogs.com/svg.latex?%5Cbg_white%20W_q%20%3D%20%5Cbegin%7Bbmatrix%7D%200.1%20%26%200.2%20%26%200.3%20%5C%5C%200.4%20%26%200.5%20%26%200.6%20%5C%5C%200.7%20%26%200.8%20%26%200.9%20%5Cend%7Bbmatrix%7D%2C%20%5C%3B%20W_k%20%3D%20%5Cbegin%7Bbmatrix%7D%200.2%20%26%200.3%20%26%200.4%20%5C%5C%200.5%20%26%200.6%20%26%200.7%20%5C%5C%200.8%20%26%200.9%20%26%200.1%20%5Cend%7Bbmatrix%7D%2C%20%5C%3B%20W_v%20%3D%20%5Cbegin%7Bbmatrix%7D%200.3%20%26%200.4%20%26%200.5%20%5C%5C%200.6%20%26%200.7%20%26%200.8%20%5C%5C%200.9%20%26%200.1%20%26%200.2%20%5Cend%7Bbmatrix%7D)
 
 **Calculating Queries (Q):**
-$$
-Q = X \cdot W_q =
-\begin{bmatrix}
-0.57 & 0.81 & 0.99 \\
-1.25 & 1.35 & 1.53 \\
-0.62 & 0.45 & 0.63
-\end{bmatrix}
-$$
+![Q Calculation](https://latex.codecogs.com/svg.latex?%5Cbg_white%20Q%20%3D%20X%20%5Ccdot%20W_q%20%3D%20%5Cbegin%7Bbmatrix%7D%200.57%20%26%200.81%20%26%200.99%20%5C%5C%201.25%20%26%201.35%20%26%201.53%20%5C%5C%200.62%20%26%200.45%20%26%200.63%20%5Cend%7Bbmatrix%7D)
 
 **Calculating Keys (K):**
-$$
-K = X \cdot W_k =
-\begin{bmatrix}
-0.81 & 1.08 & 1.24 \\
-1.30 & 1.53 & 1.79 \\
-0.85 & 0.87 & 0.59
-\end{bmatrix}
-$$
+![K Calculation](https://latex.codecogs.com/svg.latex?%5Cbg_white%20K%20%3D%20X%20%5Ccdot%20W_k%20%3D%20%5Cbegin%7Bbmatrix%7D%200.81%20%26%201.08%20%26%201.24%20%5C%5C%201.30%20%26%201.53%20%26%201.79%20%5C%5C%200.85%20%26%200.87%20%26%200.59%20%5Cend%7Bbmatrix%7D)
 
 **Calculating Values (V):**
-$$
-V = X \cdot W_v =
-\begin{bmatrix}
-1.05 & 0.84 & 1.09 \\
-1.47 & 1.04 & 1.15 \\
-1.08 & 0.68 & 0.67
-\end{bmatrix}
-$$
+![V Calculation](https://latex.codecogs.com/svg.latex?%5Cbg_white%20V%20%3D%20X%20%5Ccdot%20W_v%20%3D%20%5Cbegin%7Bbmatrix%7D%201.05%20%26%200.84%20%26%201.09%20%5C%5C%201.47%20%26%201.04%20%26%201.15%20%5C%5C%201.08%20%26%200.68%20%26%200.67%20%5Cend%7Bbmatrix%7D)
 
 ---
 
@@ -80,39 +49,15 @@ Now that we have our learned Q, K, and V matrices, the rest of the process is ex
 
 ### Step 1: Calculate Attention Scores
 `attention_scores = Q @ K.T`
+![Attention Scores with Weights](https://latex.codecogs.com/svg.latex?%5Cbg_white%20%5Ctext%7BScores%7D%20%3D%20%5Cbegin%7Bbmatrix%7D%202.37%20%26%203.23%20%26%201.83%20%5C%5C%203.23%20%26%204.38%20%26%202.49%20%5C%5C%201.83%20%26%202.49%20%26%201.48%20%5Cend%7Bbmatrix%7D)
 
-$$
-\text{Scores} =
-\begin{bmatrix}
-2.37 & 3.23 & 1.83 \\
-3.23 & 4.38 & 2.49 \\
-1.83 & 2.49 & 1.48
-\end{bmatrix}
-$$
 
 ### Step 2: Calculate Attention Weights (Softmax)
 `attention_weights = softmax(attention_scores / sqrt(d_k))`
-
-(After scaling by `sqrt(3)` and applying softmax...)
-$$
-\text{Weights} =
-\begin{bmatrix}
-0.17 & 0.65 & 0.18 \\
-0.21 & 0.70 & 0.09 \\
-0.25 & 0.54 & 0.21
-\end{bmatrix}
-$$
+![Attention Weights with Weights](https://latex.codecogs.com/svg.latex?%5Cbg_white%20%5Ctext%7BWeights%7D%20%3D%20%5Cbegin%7Bbmatrix%7D%200.17%20%26%200.65%20%26%200.18%20%5C%5C%200.21%20%26%200.70%20%26%200.09%20%5C%5C%200.25%20%26%200.54%20%26%200.21%20%5Cend%7Bbmatrix%7D)
 
 ### Step 3: Calculate Context Vectors
 `context_vectors = attention_weights @ V`
-
-$$
-\text{Context Vectors} =
-\begin{bmatrix}
-1.34 & 0.92 & 1.08 \\
-1.37 & 0.95 & 1.09 \\
-1.36 & 0.91 & 1.07
-\end{bmatrix}
-$$
+![Context Vectors with Weights](https://latex.codecogs.com/svg.latex?%5Cbg_white%20%5Ctext%7BContext%20Vectors%7D%20%3D%20%5Cbegin%7Bbmatrix%7D%201.34%20%26%200.92%20%26%201.08%20%5C%5C%201.37%20%26%200.95%20%26%201.09%20%5C%5C%201.36%20%26%200.91%20%26%201.07%20%5Cend%7Bbmatrix%7D)
 
 This is the output of the self-attention layer! These new context vectors, which were computed using **learnable weights**, now have a much richer understanding of the relationships within the text.

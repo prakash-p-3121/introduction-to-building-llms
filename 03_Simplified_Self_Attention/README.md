@@ -106,7 +106,6 @@ $$
 0.3 & 1.2 & 0.8 \\
 1.8 & -0.3 & 0.8
 \end{bmatrix}
-=
 $$
 
 ![Context Vector Result](https://latex.codecogs.com/svg.latex?%5Cbg_white%20%5Cbegin%7Bbmatrix%7D%201.64%20%26%200.02%20%26%200.67%20%5C%5C%201.20%20%26%200.39%20%26%200.83%20%5C%5C%201.53%20%26%20-0.02%20%26%200.60%20%5Cend%7Bbmatrix%7D%20%5Cquad%20%5Cbegin%7Bmatrix%7D%20%5Cleftarrow%20%5Ctext%7BContext%20for%20%22I%22%7D%20%5C%5C%20%5Cleftarrow%20%5Ctext%7BContext%20for%20%22am%22%7D%20%5C%5C%20%5Cleftarrow%20%5Ctext%7BContext%20for%20%22studying%22%7D%20%5Cend%7Bmatrix%7D)

@@ -30,7 +30,28 @@ In this simplified version: **Query = Key = Value = Our initial input vectors.**
 Let's use just the first three words for this example to keep the matrices small. We'll use the combined (word + positional) embeddings.
 `X = [x_I, x_am, x_studying]`
 
-![Equation for X](https://latex.codecogs.com/svg.latex?%5Cbg_white%20X%20%3D%20%5Cbegin%7Bbmatrix%7D%201.8%20%26%200.1%20%26%200.5%20%5C%5C%200.3%20%26%201.2%20%26%200.8%20%5C%5C%201.8%20%26%20-0.3%20%26%200.8%20%5Cend%7Bbmatrix%7D%20%5Cquad%20%5Cbegin%7Bmatrix%7D%20%5Cleftarrow%20%5Ctext%7BI%7D%20%5C%5C%20%5Cleftarrow%20%5Ctext%7Bam%7D%20%5C%5C%20%5Cleftarrow%20%5Ctext%7Bstudying%7D%20%5Cend%7Bmatrix%7D)
+<table>
+  <tr>
+    <td valign="middle">
+      $$
+      X = \begin{bmatrix}
+        1.8 & 0.1 & 0.5 \\
+        0.3 & 1.2 & 0.8 \\
+        1.8 & -0.3 & 0.8
+      \end{bmatrix}
+      $$
+    </td>
+    <td valign="middle">
+      $$
+      \begin{matrix}
+        \leftarrow \text{I} \\
+        \leftarrow \text{am} \\
+        \leftarrow \text{studying}
+      \end{matrix}
+      $$
+    </td>
+  </tr>
+</table>
 
 So, `Queries = Keys = Values = X`.
 
@@ -72,8 +93,7 @@ The scores are hard to interpret. We convert them into probabilities (that sum t
 
 First, scale by `sqrt(3) ≈ 1.732`:
 $$
-\text{Scaled Scores} = 
-\begin{bmatrix}
+\text{Scaled Scores} = \begin{bmatrix}
 2.02 & 0.61 & 2.08 \\
 0.61 & 0.98 & 0.65 \\
 2.08 & 0.65 & 2.30
@@ -81,14 +101,12 @@ $$
 $$
 Now, apply softmax to each row:
 $$
-\text{Attention Weights} = 
-\begin{bmatrix}
+\text{Attention Weights} = \begin{bmatrix}
 0.44 & 0.10 & 0.46 \\
 0.25 & 0.40 & 0.35 \\
 0.45 & 0.18 & 0.37
 \end{bmatrix}
 $$
-
 
 **Interpretation:** Look at the row for "studying" (`[0.45, 0.18, 0.37]`). This means to calculate the new vector for "studying," we should take 45% from "I," 18% from "am," and 37% from "studying" itself.
 
@@ -97,21 +115,40 @@ Finally, we create the context vectors by multiplying the **attention weights** 
 
 `context_vectors = attention_weights @ Values`
 
-$$
-\begin{bmatrix}
-0.44 & 0.10 & 0.46 \\
-0.25 & 0.40 & 0.35 \\
-0.45 & 0.18 & 0.37
-\end{bmatrix}
-\times
-\begin{bmatrix}
-1.8 & 0.1 & 0.5 \\
-0.3 & 1.2 & 0.8 \\
-1.8 & -0.3 & 0.8
-\end{bmatrix}
-$$
-
-![Context Vector Result](https://latex.codecogs.com/svg.latex?%5Cbg_white%20%5Cbegin%7Bbmatrix%7D%201.64%20%26%200.02%20%26%200.67%20%5C%5C%201.20%20%26%200.39%20%26%200.83%20%5C%5C%201.53%20%26%20-0.02%20%26%200.60%20%5Cend%7Bbmatrix%7D%20%5Cquad%20%5Cbegin%7Bmatrix%7D%20%5Cleftarrow%20%5Ctext%7BContext%20for%20%22I%22%7D%20%5C%5C%20%5Cleftarrow%20%5Ctext%7BContext%20for%20%22am%22%7D%20%5C%5C%20%5Cleftarrow%20%5Ctext%7BContext%20for%20%22studying%22%7D%20%5Cend%7Bmatrix%7D)
+<table>
+  <tr>
+    <td valign="middle">
+      $$
+      \begin{bmatrix}
+        0.44 & 0.10 & 0.46 \\
+        0.25 & 0.40 & 0.35 \\
+        0.45 & 0.18 & 0.37
+      \end{bmatrix}
+      \times
+      \begin{bmatrix}
+        1.8 & 0.1 & 0.5 \\
+        0.3 & 1.2 & 0.8 \\
+        1.8 & -0.3 & 0.8
+      \end{bmatrix}
+      =
+      \begin{bmatrix}
+        1.64 & 0.02 & 0.67 \\
+        1.20 & 0.39 & 0.83 \\
+        1.53 & -0.02 & 0.60
+      \end{bmatrix}
+      $$
+    </td>
+    <td valign="middle">
+      $$
+      \begin{matrix}
+        \leftarrow \text{Context for "I"} \\
+        \leftarrow \text{Context for "am"} \\
+        \leftarrow \text{Context for "studying"}
+      \end{matrix}
+      $$
+    </td>
+  </tr>
+</table>
 
 <br>
 

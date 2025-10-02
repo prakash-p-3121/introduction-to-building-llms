@@ -31,17 +31,19 @@ Let's use just the first three words for this example to keep the matrices small
 `X = [x_I, x_am, x_studying]`
 
 $$
-X = \begin{bmatrix}
-1.8 & 0.1 & 0.5 \\
-0.3 & 1.2 & 0.8 \\
-1.8 & -0.3 & 0.8
-\end{bmatrix}
-\quad
-\begin{matrix}
-\leftarrow \text{I} \\
-\leftarrow \text{am} \\
-\leftarrow \text{studying}
-\end{matrix}
+\begin{array}{c c}
+  X = \begin{bmatrix}
+    1.8 & 0.1 & 0.5 \\
+    0.3 & 1.2 & 0.8 \\
+    1.8 & -0.3 & 0.8
+  \end{bmatrix}
+  &
+  \begin{matrix}
+    \leftarrow \text{I} \\
+    \leftarrow \text{am} \\
+    \leftarrow \text{studying}
+  \end{matrix}
+\end{array}
 $$
 
 So, `Queries = Keys = Values = X`.
@@ -119,17 +121,19 @@ $$
 1.8 & -0.3 & 0.8
 \end{bmatrix}
 =
-\begin{bmatrix}
-1.64 & 0.02 & 0.67 \\
-1.20 & 0.39 & 0.83 \\
-1.53 & -0.02 & 0.60
-\end{bmatrix}
-\quad
-\begin{matrix}
-\leftarrow \text{Context for "I"} \\
-\leftarrow \text{Context for "am"} \\
-\leftarrow \text{Context for "studying"}
-\end{matrix}
+\begin{array}{c c}
+  \begin{bmatrix}
+    1.64 & 0.02 & 0.67 \\
+    1.20 & 0.39 & 0.83 \\
+    1.53 & -0.02 & 0.60
+  \end{bmatrix}
+  &
+  \begin{matrix}
+    \leftarrow \text{Context for "I"} \\
+    \leftarrow \text{Context for "am"} \\
+    \leftarrow \text{Context for "studying"}
+  \end{matrix}
+\end{array}
 $$
 
 We now have new, context-rich vectors! The vector for "studying" `[1.53, -0.02, 0.60]` is a weighted blend of all input vectors, informed by their relevance. This output is then passed to the next part of the Transformer block.

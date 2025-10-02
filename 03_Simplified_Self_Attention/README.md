@@ -87,30 +87,4 @@ $$
 \end{bmatrix}
 $$
 
-**Interpretation:** Look at the row for "studying" (`[0.45, 0.18, 0.37]`). This means to calculate the new vector for "studying," we should take 45% from "I," 18% from "am," and 37% from "studying" itself.
-
-### Step 3: Calculate Context Vectors
-Finally, we create the context vectors by multiplying the **attention weights** with the **Value** matrix.
-
-`context_vectors = attention_weights @ Values`
-
-$$
-\begin{bmatrix}
-0.44 & 0.10 & 0.46 \\
-0.25 & 0.40 & 0.35 \\
-0.45 & 0.18 & 0.37
-\end{bmatrix}
-\times
-\begin{bmatrix}
-1.8 & 0.1 & 0.5 \\
-0.3 & 1.2 & 0.8 \\
-1.8 & -0.3 & 0.8
-\end{bmatrix}
-=
-$$
-
-![Context Vector Result](https://latex.codecogs.com/svg.latex?%5Cbg_white%20%5Cbegin%7Bbmatrix%7D%201.64%20%26%200.02%20%26%200.67%20%5C%5C%201.20%20%26%200.39%20%26%200.83%20%5C%5C%201.53%20%26%20-0.02%20%26%200.60%20%5Cend%7Bbmatrix%7D%20%5Cquad%20%5Cbegin%7Bmatrix%7D%20%5Cleftarrow%20%5Ctext%7BContext%20for%20%22I%22%7D%20%5C%5C%20%5Cleftarrow%20%5Ctext%7BContext%20for%20%22am%22%7D%20%5C%5C%20%5Cleftarrow%20%5Ctext%7BContext%20for%20%22studying%22%7D%20%5Cend%7Bmatrix%7D)
-
-<br>
-
-We now have new, context-rich vectors! The vector for "studying" `[1.53, -0.02, 0.60]` is a weighted blend of all input vectors, informed by their relevance. This output is then passed to the next part of the Transformer block.
+**Interpretation:** Look at the row for "studying"

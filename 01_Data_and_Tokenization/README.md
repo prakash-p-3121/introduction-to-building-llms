@@ -79,8 +79,9 @@ We need to add information about the position of each word. We do this by creati
 
 A common method uses a pair of sinusoidal functions:
 
-$$ PE_{(pos, 2i)} = \sin\left(\frac{pos}{10000^{2i/d_{\text{model}}}}\right) $$
-$$ PE_{(pos, 2i+1)} = \cos\left(\frac{pos}{10000^{2i/d_{\text{model}}}}\right) $$
+![Positional Embedding Sine Formula](https://latex.codecogs.com/svg.latex?%5Cbg_white%20PE_%7B%28pos%2C%202i%29%7D%20%3D%20%5Csin%5Cleft%28%5Cfrac%7Bpos%7D%7B10000%5E%7B2i/d_%7B%5Ctext%7Bmodel%7D%7D%7D%7D%5Cright%29)
+
+![Positional Embedding Cosine Formula](https://latex.codecogs.com/svg.latex?%5Cbg_white%20PE_%7B%28pos%2C%202i%2B1%29%7D%20%3D%20%5Ccos%5Cleft%28%5Cfrac%7Bpos%7D%7B10000%5E%7B2i/d_%7B%5Ctext%7Bmodel%7D%7D%7D%7D%5Cright%29)
 
 - $pos$ is the position of the word (0, 1, 2, ...).
 - $i$ is the index of the dimension in the embedding vector (0, 1, 2 for us).
@@ -95,12 +96,3 @@ Let's calculate the positional embedding for the word "studying" at `pos=2`:
 So, the positional vector for "studying" is `[0.909, -0.416, 0.004]`.
 
 **Final Input Vector for "studying":**
-
-```
-  Word Embedding:      [0.9, 0.1, 0.8]
-+ Positional Embedding:  [0.909, -0.416, 0.004]
-------------------------------------------------
-= Final Input Vector:    [1.809, -0.316, 0.804]
-```
-
-This is done for every token. Now, our input not only contains the meaning of the words but also their order. We are ready for the Transformer!

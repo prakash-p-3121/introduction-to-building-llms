@@ -30,21 +30,28 @@ In this simplified version: **Query = Key = Value = Our initial input vectors.**
 Let's use just the first three words for this example to keep the matrices small. We'll use the combined (word + positional) embeddings.
 `X = [x_I, x_am, x_studying]`
 
-$$
-\begin{array}{c c}
-  X = \begin{bmatrix}
-    1.8 & 0.1 & 0.5 \\
-    0.3 & 1.2 & 0.8 \\
-    1.8 & -0.3 & 0.8
-  \end{bmatrix}
-  &
-  \begin{matrix}
-    \leftarrow \text{I} \\
-    \leftarrow \text{am} \\
-    \leftarrow \text{studying}
-  \end{matrix}
-\end{array}
-$$
+<table>
+  <tr>
+    <td valign="middle">
+      $$
+      X = \begin{bmatrix}
+        1.8 & 0.1 & 0.5 \\
+        0.3 & 1.2 & 0.8 \\
+        1.8 & -0.3 & 0.8
+      \end{bmatrix}
+      $$
+    </td>
+    <td valign="middle">
+      $$
+      \begin{matrix}
+        \leftarrow \text{I} \\
+        \leftarrow \text{am} \\
+        \leftarrow \text{studying}
+      \end{matrix}
+      $$
+    </td>
+  </tr>
+</table>
 
 So, `Queries = Keys = Values = X`.
 
@@ -108,32 +115,43 @@ Finally, we create the context vectors by multiplying the **attention weights** 
 
 `context_vectors = attention_weights @ Values`
 
-$$
-\begin{bmatrix}
-0.44 & 0.10 & 0.46 \\
-0.25 & 0.40 & 0.35 \\
-0.45 & 0.18 & 0.37
-\end{bmatrix}
-\times
-\begin{bmatrix}
-1.8 & 0.1 & 0.5 \\
-0.3 & 1.2 & 0.8 \\
-1.8 & -0.3 & 0.8
-\end{bmatrix}
-=
-\begin{array}{c c}
-  \begin{bmatrix}
-    1.64 & 0.02 & 0.67 \\
-    1.20 & 0.39 & 0.83 \\
-    1.53 & -0.02 & 0.60
-  \end{bmatrix}
-  &
-  \begin{matrix}
-    \leftarrow \text{Context for "I"} \\
-    \leftarrow \text{Context for "am"} \\
-    \leftarrow \text{Context for "studying"}
-  \end{matrix}
-\end{array}
-$$
+<br>
+
+<table>
+  <tr>
+    <td valign="middle">
+      $$
+      \begin{bmatrix}
+        0.44 & 0.10 & 0.46 \\
+        0.25 & 0.40 & 0.35 \\
+        0.45 & 0.18 & 0.37
+      \end{bmatrix}
+      \times
+      \begin{bmatrix}
+        1.8 & 0.1 & 0.5 \\
+        0.3 & 1.2 & 0.8 \\
+        1.8 & -0.3 & 0.8
+      \end{bmatrix}
+      =
+      \begin{bmatrix}
+        1.64 & 0.02 & 0.67 \\
+        1.20 & 0.39 & 0.83 \\
+        1.53 & -0.02 & 0.60
+      \end{bmatrix}
+      $$
+    </td>
+    <td valign="middle">
+      $$
+      \begin{matrix}
+        \leftarrow \text{Context for "I"} \\
+        \leftarrow \text{Context for "am"} \\
+        \leftarrow \text{Context for "studying"}
+      \end{matrix}
+      $$
+    </td>
+  </tr>
+</table>
+
+<br>
 
 We now have new, context-rich vectors! The vector for "studying" `[1.53, -0.02, 0.60]` is a weighted blend of all input vectors, informed by their relevance. This output is then passed to the next part of the Transformer block.

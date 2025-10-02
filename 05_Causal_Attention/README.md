@@ -22,54 +22,19 @@ When you take the softmax of a number that includes `-∞`, the result becomes `
 ## 🧮 Masking in Action
 
 Let's revisit the attention scores we calculated in the previous section:
-$$
-\text{Scores} =
-\begin{bmatrix}
-2.37 & 3.23 & 1.83 \\
-3.23 & 4.38 & 2.49 \\
-1.83 & 2.49 & 1.48
-\end{bmatrix}
-\quad
-\begin{matrix}
-\leftarrow \text{for "I"} \\
-\leftarrow \text{for "am"} \\
-\leftarrow \text{for "studying"}
-\end{matrix}
-$$
+![Attention Scores to be Masked](https://latex.codecogs.com/svg.latex?%5Cbg_white%20%5Ctext%7BScores%7D%20%3D%20%5Cbegin%7Bbmatrix%7D%202.37%20%26%203.23%20%26%201.83%20%5C%5C%203.23%20%26%204.38%20%26%202.49%20%5C%5C%201.83%20%26%202.49%20%26%201.48%20%5Cend%7Bbmatrix%7D)
 
 Our mask matrix for a 3-word sequence looks like this:
-$$
-\text{Mask} =
-\begin{bmatrix}
-0 & -\infty & -\infty \\
-0 & 0 & -\infty \\
-0 & 0 & 0
-\end{bmatrix}
-$$
+![Mask Matrix](https://latex.codecogs.com/svg.latex?%5Cbg_white%20%5Ctext%7BMask%7D%20%3D%20%5Cbegin%7Bbmatrix%7D%200%20%26%20-%5Cinfty%20%26%20-%5Cinfty%20%5C%5C%200%20%26%200%20%26%20-%5Cinfty%20%5C%5C%200%20%26%200%20%26%200%20%5Cend%7Bbmatrix%7D)
 
 Now, we add the mask to the scores:
 `masked_scores = attention_scores + mask`
-$$
-\text{Masked Scores} =
-\begin{bmatrix}
-2.37 & -\infty & -\infty \\
-3.23 & 4.38 & -\infty \\
-1.83 & 2.49 & 1.48
-\end{bmatrix}
-$$
+![Masked Scores](https://latex.codecogs.com/svg.latex?%5Cbg_white%20%5Ctext%7BMasked%20Scores%7D%20%3D%20%5Cbegin%7Bbmatrix%7D%202.37%20%26%20-%5Cinfty%20%26%20-%5Cinfty%20%5C%5C%203.23%20%26%204.38%20%26%20-%5Cinfty%20%5C%5C%201.83%20%26%202.49%20%26%201.48%20%5Cend%7Bbmatrix%7D)
 
 Finally, we scale and apply softmax as usual. Look at the resulting weights:
 
 `attention_weights = softmax(masked_scores / sqrt(d_k))`
-
-$$
-\text{Causal Weights} =
-\begin{bmatrix}
-1.00 & 0.00 & 0.00 \\
-0.22 & 0.78 & 0.00 \\
-0.25 & 0.54 & 0.21
-\end{bmatrix}
-$$
+![Causal Attention Weights](https://latex.codecogs.com/svg.latex?%5Cbg_white%20%5Ctext%7BCausal%20Weights%7D%20%3D%20%5Cbegin%7Bbmatrix%7D%201.00%20%26%200.00%20%26%200.00%20%5C%5C%200.22%20%26%200.78%20%26%200.00%20%5C%5C%200.25%20%26%200.54%20%26%200.21%20%5Cend%7Bbmatrix%7D)
 
 **Interpretation:**
 * **For "I" (row 0):** It can only attend to itself (100% weight).

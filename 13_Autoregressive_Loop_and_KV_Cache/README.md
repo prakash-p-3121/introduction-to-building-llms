@@ -47,8 +47,3 @@ KV Caching takes advantage of this.
 **Why is this a huge deal?**
 At each step, we only need to perform the Transformer calculations for a single token. We avoid re-computing the attention for the entire context every time. This changes the complexity from being quadratic with the sequence length to being linear, making text generation significantly faster and feasible for long documents. KV caching is a critical engineering optimization for making LLMs practical to use.
 
----
-<div style="background-color:#F3F4F6; padding:20px; border-radius:10px; color:#111827;">
-  <h2 align="center">🎉 Congratulations! 🎉</h2>
-  <p align="center">You have now covered all the fundamental concepts required to understand how a modern, decoder-only Transformer-based LLM like GPT works, from raw data to final text generation.
-</div>

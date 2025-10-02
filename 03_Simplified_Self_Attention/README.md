@@ -71,7 +71,9 @@ The scores are hard to interpret. We convert them into probabilities (that sum t
 `attention_weights = softmax(attention_scores / sqrt(d_k))`
 
 First, scale by `sqrt(3) ≈ 1.732`:
+
 $$
+
 \text{Scaled Scores} = \begin{bmatrix}
 2.02 & 0.61 & 2.08 \\
 0.61 & 0.98 & 0.65 \\
@@ -85,6 +87,7 @@ $$
 0.25 & 0.40 & 0.35 \\
 0.45 & 0.18 & 0.37
 \end{bmatrix}
+
 $$
 
 **Interpretation:** Look at the row for "studying" (`[0.45, 0.18, 0.37]`). This means to calculate the new vector for "studying," we should take 45% from "I," 18% from "am," and 37% from "studying" itself.

@@ -72,7 +72,8 @@ The scores are hard to interpret. We convert them into probabilities (that sum t
 
 First, scale by `sqrt(3) ≈ 1.732`:
 $$
-\text{Scaled Scores} = \begin{bmatrix}
+\text{Scaled Scores} = 
+\begin{bmatrix}
 2.02 & 0.61 & 2.08 \\
 0.61 & 0.98 & 0.65 \\
 2.08 & 0.65 & 2.30
@@ -80,7 +81,8 @@ $$
 $$
 Now, apply softmax to each row:
 $$
-\text{Attention Weights} = \begin{bmatrix}
+\text{Attention Weights} = 
+\begin{bmatrix}
 0.44 & 0.10 & 0.46 \\
 0.25 & 0.40 & 0.35 \\
 0.45 & 0.18 & 0.37

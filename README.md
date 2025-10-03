@@ -52,4 +52,4 @@ This repository is structured as a step-by-step guide. Each section builds upon 
 * **[Section 13: Autoregressive Loop & KV Caching](./13_Autoregressive_Loop_and_KV_Cache/README.md)**
     * *Generating text word-by-word and optimizing the process.*
 * **[Section 14: Pre Training Loop](./14_Pre_Training_Loop/README.md)**
-    * *Generating text word-by-word and optimizing the process.*
+    * *How to train the model to minimize loss.*

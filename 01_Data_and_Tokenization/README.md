@@ -96,6 +96,7 @@ Let's calculate the positional embedding for the word "studying" at `pos=2`:
 So, the positional vector for "studying" is `[0.909, -0.416, 0.004]`.
 
 **Final Input Vector for "studying":**
+
 Word Embedding: [0.9, 0.1, 0.8]  
 
 Positional Embedding:  [0.909, -0.416, 0.004]  
